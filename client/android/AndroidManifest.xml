@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.terry.lock"
+    android:versionCode="1"
+    android:versionName="1.1" >
+
+    <application
+        android:name = ".MyApp"
+        android:icon="@drawable/icon2"
+        android:label="@string/app_name" 
+        >
+        <!--  
+        <activity
+            android:name=".main"
+            android:label="@string/app_name"
+            android:theme="@style/Theme"
+            android:launchMode="singleTask" 
+             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+        <activity
+            android:name=".Appstart"
+            android:label="@string/app_name"
+            android:theme="@style/Theme"
+             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Viewpager"
+            android:theme="@style/Anim_style2" >
+        </activity>
+        <activity
+            android:name=".Viewdoor"
+            android:theme="@style/Anim_style2" >
+        </activity>
+        <activity
+            android:name=".main"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MainWeixin"
+            android:theme="@style/Anim_style2" />
+        <activity
+            android:name="Exit"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+
+        <service android:name=".LockService" />
+
+        <receiver
+            android:name=".MyReceiver"
+            android:label="@string/app_name" >
+            <intent-filter>
+
+                <!-- action.BOOT_COMPLETED 开机广播 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".MyService" >
+        </service>
+        <service android:name=".OtherService" >
+        </service>
+    </application>
+
+    <uses-sdk android:minSdkVersion="11" />
+    <!-- RECEIVE_BOOT_COMPLETED 允许一个程序接收到 ACTION_BOOT_COMPLETED广播在系统完成启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" >
+    </uses-permission>
+    <!-- DISABLE_KEYGUARD 允许程序禁用键盘 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" >
+    </uses-permission>
+    <!-- 允许使用PowerManager的 WakeLocks保持进程在休眠时从屏幕消失 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+
+</manifest>
