@@ -1,14 +1,13 @@
 package com.terry.lock;
 
 //import cn.buaa.myweixin.R;
-import com.terry.lock.Viewpager;
-//import cn.buaa.myweixin.R.layout;
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.WindowManager;
+import android.os.Bundle;
+import android.os.Handler;
+
+import com.avos.avoscloud.AVObject;
+//import cn.buaa.myweixin.R.layout;
 
 public class Appstart extends Activity{
 	
@@ -17,11 +16,6 @@ public class Appstart extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.appstart);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);//ȥ��������
-		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);   //ȫ����ʾ
-		//Toast.makeText(getApplicationContext(), "���ӣ��úñ��У�", Toast.LENGTH_LONG).show();
-		//overridePendingTransition(R.anim.hyperspace_in, R.anim.hyperspace_out);
 		
 	new Handler().postDelayed(new Runnable(){
 		@Override

@@ -87,6 +87,7 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" >
     </uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
 
 </manifest>
