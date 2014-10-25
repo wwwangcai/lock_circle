@@ -30,10 +30,13 @@ public class LockUser extends AVUser {
 	public static final String DEFAULT_ADDR =  "defaultAddr";
 	//默认银行卡 pointer to Cards
 	public static final String DEFAULT_CARD =  "defaultCard";
+	//该用户所有兑换记录
+	public static final String EXCHANGE =  "exchange";
 		
 	private AVRelation<UserGame> ugRelation = null;
 	private AVRelation<Address> addrRelation = null;
 	private AVRelation<Card> cardRelation = null;
+	private AVRelation<Exchange> exRelation = null;
 	
 	public LockUser() {
 		super();
@@ -84,6 +87,7 @@ public class LockUser extends AVUser {
 
 	public void getRevenue(GetCallback<AVObject> callback) {
 		this.getAVObject(REVENUE).fetchIfNeededInBackground(callback);
+		//this.getAVObject(REVENUE, LockUser.class).fetchIfNeededInBackground(callback);
 	}
 
 	public void setRevenue(Revenue revenue) throws AVException {
@@ -114,7 +118,7 @@ public class LockUser extends AVUser {
 		this.ugRelation.getQuery().findInBackground(callback);
 	}
 
-	public void setGames(UserGame game) {
+	public void addGames(UserGame game) {
 		this.ugRelation.add(game);
 	}
 
@@ -122,7 +126,7 @@ public class LockUser extends AVUser {
 		this.addrRelation.getQuery().findInBackground(callback);
 	}
 
-	public void setAddress(Address address) {
+	public void addAddress(Address address) {
 		this.addrRelation.add(address);
 	}
 
@@ -130,7 +134,7 @@ public class LockUser extends AVUser {
 		this.cardRelation.getQuery().findInBackground(callback);
 	}
 
-	public void setCard(Card card) {
+	public void addCard(Card card) {
 		this.cardRelation.add(card);
 	}
 	
@@ -148,6 +152,14 @@ public class LockUser extends AVUser {
 
 	public void setDefaultCard(Card card) throws AVException {
 		this.put(DEFAULT_CARD, AVObject.createWithoutData(Card.class, card.getObjectId()));
+	}
+	
+	public void getExchange(FindCallback<Exchange> callback) {
+		this.exRelation.getQuery().findInBackground(callback);
+	}
+
+	public void addExchange(Exchange exchange) {
+		this.exRelation.add(exchange);
 	}
 
 }
