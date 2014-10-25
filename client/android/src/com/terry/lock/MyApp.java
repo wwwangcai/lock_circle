@@ -2,7 +2,6 @@ package com.terry.lock;
 
 import android.app.Application;
 import android.os.Handler;
-import com.avos.avoscloud.AVOSCloud;
 //import com.avos.avoscloud.AVAnalytics;
 
 /**
@@ -13,8 +12,9 @@ import com.avos.avoscloud.AVOSCloud;
  */
 public class MyApp extends Application {
 	
+	@Override
 	public void onCreate() {
-	    AVOSCloud.initialize(this, "f8v0zoarc9jrk4sxom03wes6udntd4utpdhbaxohg5j4514f", "hqi4gfplb5vzya7k8wt91ksj6siy784o0vxr82kqf22a0m9r");
+	    AVService.AVInit(this);
 	}
 	
 	// 共享变量

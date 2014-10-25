@@ -9,27 +9,27 @@ import com.avos.avoscloud.GetCallback;
 
 public class LockUser extends AVUser {
 	
-	private static final String UNIUE_ID =  "uniqueId";
-	private static final String GENDER =  "gender";
-	private static final String BIRTHDAY =  "birthday";
-	private static final String INVATATION =  "invatation";
+	public static final String UNIUE_ID =  "uniqueId";
+	public static final String GENDER =  "gender";
+	public static final String BIRTHDAY =  "birthday";
+	public static final String INVATATION =  "invatation";
 	
 	//此列是pointer类型的 指向LockUser表
-	private static final String BELONGS =  "belongs";
+	public static final String BELONGS =  "belongs";
 	//pointer类型 指向UserGame中一条数据
-	private static final String CURRENT_GAME =  "curentGame";
+	public static final String CURRENT_GAME =  "curentGame";
 	//pointer类型 指向Revenue中一条数据
-	private static final String REVENUE =  "revenue";
+	public static final String REVENUE =  "revenue";
 	//该用户曾经玩过的所有游戏, relation类型，关联至UserGame表
-	private static final String GAMES =  "games";
+	public static final String GAMES =  "games";
 	//地址，关联至Address表。relation类型
-	private static final String ADDRESS =  "address";
+	public static final String ADDRESS =  "address";
 	//银行卡，包括支付宝账号。 关联至Cards表。relation类型
-	private static final String CARD =  "card";
+	public static final String CARD =  "card";
 	//默认地址 pointer to Address
-	private static final String DEFAULT_ADDR =  "defaultAddr";
+	public static final String DEFAULT_ADDR =  "defaultAddr";
 	//默认银行卡 pointer to Cards
-	private static final String DEFAULT_CARD =  "defaultCard";
+	public static final String DEFAULT_CARD =  "defaultCard";
 		
 	private AVRelation<UserGame> ugRelation = null;
 	private AVRelation<Address> addrRelation = null;
