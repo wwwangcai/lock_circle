@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/lockscreen_bgimage"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_lockscreen_bgimg" />
+    </LinearLayout>
+
+    <com.pinping.lockfun.SlideLayout
+        android:id="@+id/slide_layout"
+        android:name=".SlideLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="80.0dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/slide_background_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/buttonLeft"
+            android:layout_width="30.0dip"
+            android:layout_height="30.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="35.0dip"
+            android:layout_marginTop="25.0dip"
+            android:scaleType="fitCenter" />
+
+        <RelativeLayout
+            android:id="@+id/buttonLeft_comb"
+            android:layout_width="60.0dip"
+            android:layout_height="60.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginTop="10.0dip" >
+
+            <ImageView
+                android:id="@+id/buttonLeft_click"
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:layout_centerInParent="true"
+                android:duplicateParentState="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/game_down" />
+
+            <ImageView
+                android:id="@+id/buttonLeft_circle"
+                android:layout_width="60.0dip"
+                android:layout_height="60.0dip"
+                android:duplicateParentState="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/side_ring" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/buttonRight"
+            android:layout_width="30.0dip"
+            android:layout_height="30.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35.0dip"
+            android:layout_marginTop="25.0dip"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/unlock_up" />
+
+        <RelativeLayout
+            android:id="@+id/buttonRight_comb"
+            android:layout_width="60.0dip"
+            android:layout_height="60.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="10.0dip" >
+
+            <ImageView
+                android:id="@+id/buttonright_click"
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/unlock_down" />
+
+            <ImageView
+                android:id="@+id/buttonright_circle"
+                android:layout_width="60.0dip"
+                android:layout_height="60.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/side_ring" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/slide_ring"
+            android:layout_width="60.0dip"
+            android:layout_height="60.0dip"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/side_ring"
+            android:visibility="visible" />
+    </com.pinping.lockfun.SlideLayout>
+
+</RelativeLayout>

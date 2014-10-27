@@ -1,1 +1,1 @@
-for games
+this dir is for lockscreenView & gameView
