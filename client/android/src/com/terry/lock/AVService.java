@@ -34,6 +34,8 @@ public class AVService {
     AVObject.registerSubclass(UserGame.class);
     AVObject.registerSubclass(Games.class);
     AVObject.registerSubclass(Revenue.class);
+    AVObject.registerSubclass(Exchange.class);
+    AVObject.registerSubclass(Good.class);
     df = new DeviceUuidFactory(ctx);
   }
 
