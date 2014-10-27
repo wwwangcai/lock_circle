@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">锁趣</string>
+    <string name="game_item_number">16</string>
+    <string name="game_round_count">5</string>
+    <string name="game_score_prefix">所用时间</string>
+    <string name="game_coin_prefix">所得coin</string>
+
+
+</resources>

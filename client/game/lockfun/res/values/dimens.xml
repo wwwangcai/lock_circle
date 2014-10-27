@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="view_game_timebar_h">16.0dip</dimen>
+    <dimen name="slide_ring_h">60.0dp</dimen>
+    <dimen name="slide_ring_w">60.0dp</dimen>
+</resources>
