@@ -55,6 +55,13 @@
             android:name="Exit"
             android:theme="@style/MyDialogStyle" >
         </activity>
+        <activity
+            android:name=".MyAccount"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".GenderSetting"
+            android:theme="@style/AppBaseTheme" />
+        <activity android:name="org.achartengine.GraphicalActivity" />
 
         <service android:name=".LockService" />
 

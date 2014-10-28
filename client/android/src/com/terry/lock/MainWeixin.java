@@ -16,6 +16,7 @@ import com.terry.lock.MagicScrollView;
 import com.terry.lock.MagicTextView;
 import com.terry.lock.R;
 
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.annotation.SuppressLint;

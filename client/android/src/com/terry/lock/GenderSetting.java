@@ -1,20 +1,20 @@
 package com.terry.lock;
 
 //import cn.buaa.myweixin.R;
-import com.terry.lock.Viewpager;
-//import cn.buaa.myweixin.R.layout;
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.SaveCallback;
+//import cn.buaa.myweixin.R.layout;
 
 public class GenderSetting extends Activity{
 	//false--> male   true--> female
@@ -26,6 +26,8 @@ public class GenderSetting extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		//LockUser TODO-- move to app
+		
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_gender_setting);
 		
@@ -74,10 +76,51 @@ public class GenderSetting extends Activity{
 		
 		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
       }
+	
 	public void confirmGender(View v) {  
 		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
 		//startActivity(intent);
-		Toast.makeText(getApplicationContext(), "提交请求", Toast.LENGTH_LONG).show();
+		LockUser user = AVUser.getCurrentUser(LockUser.class);
+		if (user == null)
+		{Toast.makeText(getApplicationContext(), "提交请求失败", Toast.LENGTH_LONG).show();}
+		String gender_name = "undefined";
+		gender_name = (gender == false) ? "male":"female";
+		user.setGender(gender_name);
+		/*
+	     if (true) {
+	         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+	                 .detectDiskReads()
+	                 .detectDiskWrites()
+	                 .detectNetwork()   // or .detectAll() for all detectable problems
+	                 .penaltyLog()
+	                 .build());
+	         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+	                 .detectLeakedSqlLiteObjects()
+	                 .detectLeakedClosableObjects()
+	                 .penaltyLog()
+	                 .penaltyDeath()
+	                 .build());
+	     }
+	     */
+		/*try {
+			user.save();
+		} catch (AVException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	     SaveCallback callback = new SaveCallback(){
+
+			@Override
+			public void done(AVException arg0) {
+				// TODO Auto-generated method stub
+				if (arg0 == null){
+					Toast.makeText(getApplicationContext(), "提交请求", Toast.LENGTH_LONG).show();
+				}
+			}
+	    	 
+	     };
+	     user.saveInBackground(callback);
+		//Toast.makeText(getApplicationContext(), "提交请求", Toast.LENGTH_LONG).show();
 		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
       }
 }
