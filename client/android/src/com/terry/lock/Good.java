@@ -22,6 +22,10 @@ public class Good extends AVObject {
 	public static final String TYPE_REAL = "real";
 	public static final String TYPE_CASH = "cash";
 	
+	public Good(){
+		super();
+	}
+	
 	public String getName() {
 		return (this.getString(NAME));
 		

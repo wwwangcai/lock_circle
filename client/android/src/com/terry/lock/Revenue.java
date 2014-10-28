@@ -25,6 +25,10 @@ public class Revenue extends AVObject {
 	private static final String DAY6 =  "day6";
 	private static final String DAY7 =  "day7";
 	
+	public Revenue(){
+		super();
+	}
+	
 	public String getTotal() {
 		return (this.getString(TOTAL));
 		

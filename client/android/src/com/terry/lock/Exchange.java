@@ -15,6 +15,10 @@ public class Exchange extends AVObject {
 	private static final String STATUS =  "status";
 	private static final String COUNT =  "count";
 	
+	public Exchange(){
+		super();
+	}
+	
 	public String getStatus() {
 		return (this.getString(STATUS));
 		

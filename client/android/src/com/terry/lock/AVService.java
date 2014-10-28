@@ -119,10 +119,41 @@ public class AVService {
   }
   
   //type should be GOOD.TYPE_VIRTUAL/GOOD.TYPE_REAL/GOOD.TYPE_CASH
-  public static void fetchGoodByType(String type, FindCallback<Good> callback){
-	  AVQuery<Good> query = new AVQuery<Good>();
+  //public static void fetchGoodByType(String type, FindCallback<Good> callback){
+  public static void fetchGoodByType(String type){
+	  AVQuery<Good> query = AVQuery.getQuery(Good.class);
+	  //AVQuery<AVObject> query = new AVQuery<AVObject>("Good");
 	  query.whereEqualTo(Good.TYPE, type);
-	  query.findInBackground(callback);
+	  //query.whereEqualTo("type", type);
+	  
+	  query.findInBackground(new FindCallback<Good>(){
+
+			@Override
+			public void done(List<Good> arg0, AVException arg1) {
+				Log.e("TEST", "inter done");
+				if (arg1 != null){
+					Log.e("TEST", arg1.getMessage());
+				} else {
+					for (Good g : arg0){
+						Log.e("TEST", g.getString("name"));
+					}
+				}
+				// TODO Auto-generated method stub
+			}
+			
+		});
+		
+	  /*
+	  try {
+		List<Good> goods = query.find();
+		for (Good g : goods){
+			Log.e("TEST", g.getString("name"));
+		}
+	} catch (AVException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	*/
   }
   
   //fetch all games

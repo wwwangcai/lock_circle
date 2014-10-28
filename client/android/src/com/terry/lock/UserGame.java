@@ -18,6 +18,9 @@ public class UserGame extends AVObject {
 	//某用户在该游戏上的总收益
 	private static final String TOTAL_REVENUE =  "totalRevenue";
 	
+	public UserGame(){
+		super();
+	}
 	
 	public String getMaxScore() {
 		return (this.getString(MAX_SCORE));
