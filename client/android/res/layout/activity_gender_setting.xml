@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="@color/bg_grey" style="@style/new_setting_scroll_view"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:id="@id/gender_setting_ll_selectors" android:background="@drawable/item_view_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="10.0dip">
+            <LinearLayout style="@style/new_setting_linear_layout_list">
+                <RelativeLayout android:id="@id/gender_setting_rl_male" android:onClick="checkGender" style="@style/new_setting_relative_layout_item">
+                    <TextView android:text="@string/gender_male" style="@style/new_setting_grey_text" />
+                    <ImageView android:id="@id/gender_setting_radio_male" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/item_view_gender_check" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                </RelativeLayout>
+                <View style="@style/custom_divider" />
+                <RelativeLayout android:id="@id/gender_setting_rl_female" android:onClick="checkGender" style="@style/new_setting_relative_layout_item">
+                    <TextView android:text="@string/gender_female" style="@style/new_setting_grey_text" />
+                    <ImageView android:id="@id/gender_setting_radio_female" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/item_view_gender_check" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <Button android:text="@string/confirm" android:layout_below="@id/gender_setting_ll_selectors" android:onClick="confirmGender" style="@style/button_red_long" />
+    </RelativeLayout>
+</ScrollView>

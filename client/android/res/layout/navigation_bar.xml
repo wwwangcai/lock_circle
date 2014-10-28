@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/main_red" android:layout_width="fill_parent" android:layout_height="@dimen/navi_bar_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button android:id="@id/navi_bar_left_btn" android:background="@drawable/navi_back_btn" android:visibility="gone" android:layout_width="72.0dip" android:layout_height="fill_parent" />
+    <ImageView android:id="@id/navi_bar_back_img" android:visibility="gone" android:layout_width="@dimen/navi_bar_back_btn_width" android:layout_height="@dimen/navi_bar_back_btn_height" android:layout_marginLeft="15.0dip" android:src="@drawable/navi_bar_back_img" android:layout_centerVertical="true" />
+    <TextView android:textSize="@dimen/num_thr_text_size" android:textColor="@color/white" android:id="@id/navi_bar_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="100.0dip" android:layout_marginRight="100.0dip" android:singleLine="true" android:layout_centerInParent="true" />
+    <RelativeLayout android:padding="@dimen/navi_bar_button_padding" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginRight="@dimen/navi_bar_horizontal_margin" android:layout_alignParentRight="true">
+        <ImageButton android:id="@id/navi_bar_right_btn" android:background="@null" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_back_button" android:layout_centerVertical="true" android:contentDescription="@null" />
+        <TextView android:textSize="12.0sp" android:id="@id/navi_bar_right_text" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>

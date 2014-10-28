@@ -2,16 +2,27 @@ package com.terry.lock;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+import org.achartengine.ChartFactory;
+import org.achartengine.chart.PointStyle;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer;
 
 import com.terry.lock.MagicScrollView;
 import com.terry.lock.MagicTextView;
 import com.terry.lock.R;
+
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -26,9 +37,13 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak") public class MainWeixin extends Activity {
@@ -69,6 +84,7 @@ import android.widget.Toast;
         public void handleMessage(android.os.Message msg) {
             int height = mContainer.getMeasuredHeight();
             Log.d("height  is ====>", "" + height);
+            /*
             onMeasureTxt(mIncomeTxt);
             onMeasureTxt(mTotalMoneyTxt);
             onMeasureTxt(mIncTotalTxt);
@@ -77,6 +93,10 @@ import android.widget.Toast;
             onMeasureTxt(mIncMonTxt);
             onMeasureTxt(mOverPerTxt);
             onMeasureTxt(mOverCountTxt);
+            */
+            onMeasureTxt(mIncomeTxt);
+            onMeasureTxt(mTotalMoneyTxt);
+            onMeasureTxt(mIncTotalTxt);
             mScrollView.sendScroll(MagicScrollView.UP, 0);
         };
     };
@@ -86,6 +106,7 @@ import android.widget.Toast;
         getWindow().getDecorView().getWindowVisibleDisplayFrame(fram);
         mWinheight = fram.height();
         Log.d("winHeight is ====>", "" + mWinheight);
+        /*
         mScrollView = (MagicScrollView) father_view.findViewById(R.id.magic_scroll);
         mIncomeTxt = (MagicTextView) father_view.findViewById(R.id.income_money);
         mTotalMoneyTxt = (MagicTextView) father_view.findViewById(R.id.total_money);
@@ -105,11 +126,22 @@ import android.widget.Toast;
         mIncMonTxt.setValue(40.20);
         mOverPerTxt.setValue(88.88);
         mOverCountTxt.setValue(300000000);
+        */
+        mContainer = (LinearLayout) father_view.findViewById(R.id.me_container);
+        mScrollView = (MagicScrollView) father_view.findViewById(R.id.firstpage_magic_scroll);
+        mIncomeTxt = (MagicTextView) father_view.findViewById(R.id.firstpage_crrent_rewards);
+        mIncTotalTxt = (MagicTextView) father_view.findViewById(R.id.firstpage_yestoday_rewards);
+        mTotalMoneyTxt = (MagicTextView) father_view.findViewById(R.id.firstpage_total_rewards);
+        
+        mIncomeTxt.setValue(100);
+        mIncTotalTxt.setValue(100);
+        mTotalMoneyTxt.setValue(10000);
         initListener();
         mHandler.sendEmptyMessageDelayed(0, 3000);
     }
 
     private void initListener() {
+    	/*
         mScrollView.AddListener(mIncomeTxt);
         mScrollView.AddListener(mTotalMoneyTxt);
         mScrollView.AddListener(mIncTotalTxt);
@@ -118,6 +150,10 @@ import android.widget.Toast;
         mScrollView.AddListener(mIncMonTxt);
         mScrollView.AddListener(mOverPerTxt);
         mScrollView.AddListener(mOverCountTxt);
+        */
+        mScrollView.AddListener(mIncomeTxt);
+        mScrollView.AddListener(mTotalMoneyTxt);
+        mScrollView.AddListener(mIncTotalTxt);
     }
 
     private void onMeasureTxt(MagicTextView view) {
@@ -126,6 +162,80 @@ import android.widget.Toast;
         view.setLocHeight(location[1]);
         Log.d("window y is ====>", "" + location[1]);
     }
+    //achartEngine
+	protected void initAchart() {
+		// TODO Auto-generated method stub
+		// 1, 构造显示用渲染图
+		XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+		// 2,进行显示
+		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
+		// 2.1, 构建数据
+		Random r = new Random();
+		for (int i = 0; i < 2; i++) {
+			XYSeries series = new XYSeries("test" + (i + 1));
+			// 填充数据
+			for (int k = 0; k < 10; k++) {
+				// 填x,y值
+				series.add(k, 20 + r.nextInt() % 100);
+			}
+			// 需要绘制的点放进dataset中
+			dataset.addSeries(series);
+		}
+		// 3, 对点的绘制进行设置
+		XYSeriesRenderer xyRenderer = new XYSeriesRenderer();
+		// 3.1设置颜色
+		xyRenderer.setColor(Color.BLUE);
+		// 3.2设置点的样式
+		xyRenderer.setPointStyle(PointStyle.SQUARE);
+		// 3.3, 将要绘制的点添加到坐标绘制中
+		renderer.addSeriesRenderer(xyRenderer);
+		// 3.4,重复 1~3的步骤绘制第二个系列点
+		xyRenderer = new XYSeriesRenderer();
+		xyRenderer.setColor(Color.RED);
+		xyRenderer.setPointStyle(PointStyle.CIRCLE);
+		renderer.addSeriesRenderer(xyRenderer);
+		// Intent intent = new LinChart().execute(this);
+		Intent intent = ChartFactory
+				.getLineChartIntent(this, dataset, renderer);
+		startActivity(intent);
+		//return ChartFactory.getLineChartView(this, dataset, renderer);
+
+	}
+	//listView展示
+	protected void initListView(View father_view) {
+		ListView list = (ListView) father_view.findViewById(R.id.gameListView);
+		//生成数据用
+		ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
+        for(int i=0;i<10;i++)  
+        {  
+            HashMap<String, Object> map = new HashMap<String, Object>();  
+            map.put("ItemImage", R.drawable.item_view_networkcontrol);//图像资源的ID  
+            map.put("ItemTitle", "Level "+i);  
+            map.put("ItemText", "Finished in 1 Min 54 Secs, 70 Moves! ");  
+            listItem.add(map);  
+        }  
+        //生成适配器的Item和动态数组对应的元素  
+        SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItem,//数据源   
+            R.layout.activity_game_item,//ListItem的XML实现  
+            //动态数组与ImageItem对应的子项          
+            new String[] {"ItemImage","ItemTitle", "ItemText"},   
+            //ImageItem的XML文件里面的一个ImageView,两个TextView ID  
+            new int[] {R.id.mall_item_img,R.id.mall_item_title,R.id.mall_item_desc}  
+        );  
+         
+        //添加并且显示  
+        list.setAdapter(listItemAdapter); 
+        //添加点击  
+        list.setOnItemClickListener(new OnItemClickListener() {  
+  
+            @Override  
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,  
+                    long arg3) {  
+            	Toast.makeText(getApplicationContext(), "点击第"+arg2+"个项目", Toast.LENGTH_LONG).show();
+            }  
+        }); 
+		
+	}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,17 +272,28 @@ import android.widget.Toast;
         three = one*3;
         //Log.i("info", "获取的屏幕分辨率为" + one + two + three + "X" + displayHeight);
         
+        
         //InitImageView();//使用动画
         //将要分页显示的View装入数组中
         LayoutInflater mLi = LayoutInflater.from(this);
-        View view1 = mLi.inflate(R.layout.main_tab_weixin, null);
-        View view2 = mLi.inflate(R.layout.main_tab_address, null);
-        View view3 = mLi.inflate(R.layout.main_tab_friends, null);
-        View view4 = mLi.inflate(R.layout.main_tab_settings, null);
+        //View view1 = mLi.inflate(R.layout.main_tab_weixin, null);
+        View view1 = mLi.inflate(R.layout.first_page_layout, null);
+        //LinearLayout view1 =  (LinearLayout)mLi.inflate(R.layout.first_page_layout, null);
+        //View view2 = mLi.inflate(R.layout.main_tab_address, null);
+        View view2 = mLi.inflate(R.layout.activity_game, null);
+        //View view3 = mLi.inflate(R.layout.main_tab_friends, null);
+        View view3 = mLi.inflate(R.layout.activity_shopping, null);
+        //View view4 = mLi.inflate(R.layout.main_tab_settings, null);
+        View view4 = mLi.inflate(R.layout.activity_setting, null);
         
         //用于初始化支付宝效果
         initMagic(view1);
-        
+        //加入图表效果
+        //view1.addView(initAchart());
+        //初始化listview，后续加载物品在此栏目进行
+        initListView(view2);
+
+
       //每个页面的view数据
         final ArrayList<View> views = new ArrayList<View>();
         views.add(view1);
@@ -373,10 +494,79 @@ import android.widget.Toast;
 
 	public void exit_settings(View v) {                           //退出  伪“对话框”，其实是一个activity
 		//Intent intent = new Intent (MainWeixin.this,ExitFromSettings.class);
-		Intent intent = new Intent (MainWeixin.this,Exit.class);
-		startActivity(intent);	
+		//Intent intent = new Intent (MainWeixin.this,Exit.class);
+		//startActivity(intent);	
+		initAchart();
 	 }
-
+    //activity_setting 所有按钮设置
+	public void goLockSetting(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	
+	public void goMyAccount(View v) {  
+		Intent intent = new Intent (MainWeixin.this,MyAccount.class);			
+		startActivity(intent);
+		//Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	
+	public void goMyDownload(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	
+	public void goFlowControl(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	
+	public void goFeedback(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	
+	public void goCheckUpdate(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	
+	public void goAboutMe(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	//以下为兑换各activty 入口
+	public void goShopVitem(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "虚拟商品", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }  
+	public void goShopCitem(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "提现充值", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      } 
+	public void goShopRitem(View v) {  
+		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "实物商品", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }
+	
 }
     
     
