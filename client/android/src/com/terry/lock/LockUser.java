@@ -34,6 +34,7 @@ public class LockUser extends AVUser {
 	public static final String DEFAULT_CARD =  "defaultCard";
 	//该用户所有兑换记录
 	public static final String EXCHANGE =  "exchange";
+	public static final String NICKNAME =  "nickName";
 		
 	//private AVRelation<UserGame> ugRelation = null;
 	//private AVRelation<Address> addrRelation = null;
@@ -54,6 +55,14 @@ public class LockUser extends AVUser {
     public void setUserName(String username) {
         this.setUsername(username);
     }
+    
+    public String getNickName() {
+		return this.getString(NICKNAME);
+	}
+
+	public void setNickName(String name) {
+		this.put(NICKNAME, name);
+	}
  
     public String getUniueId() {
 		return this.getString(UNIUE_ID);

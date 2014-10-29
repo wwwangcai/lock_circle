@@ -7,7 +7,7 @@ import android.telephony.TelephonyManager;
 import java.io.UnsupportedEncodingException;  
 import java.util.UUID;  
 public class DeviceUuidFactory {  
-    protected static final String PREFS_FILE = "device_id.xml";  
+    protected static final String PREFS_FILE = "device_id";  
     protected static final String PREFS_DEVICE_ID = "device_id";  
     protected static UUID uuid;  
   
@@ -16,7 +16,8 @@ public class DeviceUuidFactory {
             synchronized (DeviceUuidFactory.class) {  
                 if( uuid == null) {  
                     final SharedPreferences prefs = context.getSharedPreferences( PREFS_FILE, 0);  
-                    final String id = prefs.getString(PREFS_DEVICE_ID, null );  
+                    final String id = prefs.getString(PREFS_DEVICE_ID, null );
+                    //final String id = null;
                     if (id != null) {  
                         // Use the ids previously computed and stored in the prefs file  
                         uuid = UUID.fromString(id);  

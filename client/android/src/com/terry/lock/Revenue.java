@@ -9,31 +9,49 @@ import com.avos.avoscloud.AVObject;
 @AVClassName("Revenue")
 public class Revenue extends AVObject {
 	
-	private static final String TOTAL =  "total";
-	private static final String TOTAL_CLD =  "totalCLD";
-	private static final String TOTAL_COMP =  "totalComp";
-	private static final String TOTAL_ACT =  "totalAct";
-	private static final String MAX_COMP =  "maxComp";
-	private static final String LASTDAY_CLD =  "lastDayCLD";
-	private static final String LASTDAY_COMP =  "lastDayComp";
-	private static final String LASTDAY_ACT =  "lastDayAct";
-	private static final String DAY1 =  "day1";
-	private static final String DAY2 =  "day2";
-	private static final String DAY3 =  "day3";
-	private static final String DAY4 =  "day4";
-	private static final String DAY5 =  "day5";
-	private static final String DAY6 =  "day6";
-	private static final String DAY7 =  "day7";
+	public static final String TOTAL =  "total";
+	public static final String TOTAL_CLD =  "totalCLD";
+	public static final String TOTAL_COMP =  "totalComp";
+	public static final String TOTAL_ACT =  "totalAct";
+	public static final String MAX_COMP =  "maxComp";
+	public static final String LASTDAY_CLD =  "lastDayCLD";
+	public static final String LASTDAY_COMP =  "lastDayComp";
+	public static final String LASTDAY_ACT =  "lastDayAct";
+	public static final String DAY1 =  "day1";
+	public static final String DAY2 =  "day2";
+	public static final String DAY3 =  "day3";
+	public static final String DAY4 =  "day4";
+	public static final String DAY5 =  "day5";
+	public static final String DAY6 =  "day6";
+	public static final String DAY7 =  "day7";
+	private static final String ZERO = "0";
 	
 	public Revenue(){
 		super();
 	}
 	
+	public void initAllField(){
+		this.setDay1(ZERO);
+		this.setDay2(ZERO);
+		this.setDay3(ZERO);
+		this.setDay4(ZERO);
+		this.setDay5(ZERO);
+		this.setDay6(ZERO);
+		this.setDay7(ZERO);
+		this.setLastdayAct(ZERO);
+		this.setLastdayCld(ZERO);
+		this.setLastdayComp(ZERO);
+		this.setMaxComp(ZERO);
+		this.setTotal(ZERO);
+		this.setTotalAct(ZERO);
+		this.setTotalCld(ZERO);
+		this.setTotalComp(ZERO);
+	}
 	public String getTotal() {
 		return (this.getString(TOTAL));
 		
 	}
-	public void setTotal(float total) {
+	public void setTotal(String total) {
 		this.put(TOTAL, total);
 	}
 	

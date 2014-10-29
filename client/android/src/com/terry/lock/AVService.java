@@ -10,6 +10,7 @@ import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.SaveCallback;
 
@@ -18,9 +19,9 @@ import com.avos.avoscloud.SaveCallback;
  */
 public class AVService {
  
-  protected static DeviceUuidFactory df = null;
+  public static DeviceUuidFactory df = null;
   private static final String AV_TAG = "AVService";
-  private static final String DEFAULT_PASSWD = "lockin1234";
+  public static final String DEFAULT_PASSWD = "lockin1234";
 
   public static void AVInit(Context ctx) {
     
@@ -39,13 +40,17 @@ public class AVService {
     df = new DeviceUuidFactory(ctx);
   }
 
-  //每一个终端安装及首次启动后都会默认的注册一个用户, 用户名，密码和uniqueID都是跟手机设备绑定的。
-  //当用户真正注册的时候会填入手机号和密码，这时候其实是相当于更新原来已存在用户的mobilephone number
-  //当用户登陆时，这时候相当于调用loginByMobilePhoneNumberInBackground
+   /**
+   *每一个终端安装及首次启动后都会默认的注册一个用户, 用户名，密码和uniqueID都是跟手机设备绑定的。
+   *当用户真正注册的时候会填入手机号和密码，这时候其实是相当于更新原来已存在用户的mobilephone number
+   *当用户登陆时，这时候相当于调用loginByMobilePhoneNumberInBackground
+   * @param callback
+   * @throws AVException
+   */
   public static void signupOrLoginLockUser(LogInCallback<LockUser> callback) throws AVException {
 	  String uniqueId = df.getDeviceUuid().toString();
 	  //check if there is already recode existed
-	  AVQuery<LockUser> query = new AVQuery<LockUser>();
+	  AVQuery<LockUser> query = AVQuery.getQuery(LockUser.class);
 	  query.whereEqualTo(LockUser.UNIUE_ID, uniqueId);
 	  int user_count = 0;
 	  try {
@@ -83,14 +88,74 @@ public class AVService {
 	  }
   }
   
-  private static boolean createAnymousLockUser(String name) throws AVException{
+  public static void signupOrLoginLockUser() {
+	  String uniqueId = df.getDeviceUuid().toString();
+	  //check if there is already recode existed
+	  AVQuery<LockUser> query = AVQuery.getQuery(LockUser.class);
+	  query.whereEqualTo(LockUser.UNIUE_ID, uniqueId);
+	  int user_count = 0;
+	  try {
+		user_count = query.count();
+	  } catch (AVException e) {
+		Log.i(AV_TAG, "more then 1000 user existed");
+		user_count = 1000;
+	  }
+	  if (user_count > 0 ) {
+		  //already existed
+		  try {
+			List<LockUser> lockUserList = query.find();
+			if (lockUserList.size() == 1) {
+				LockUser currentUser = lockUserList.get(0);
+				String name = currentUser.getUserName();
+				String passwd = DEFAULT_PASSWD;
+				LockUser.logIn(name, passwd, LockUser.class);
+				
+			}
+		  } catch (AVException e) {
+			// 
+			  Log.e(AV_TAG, "some thing wrong when query LockUser, so create it");
+			  if (createAnymousLockUser(uniqueId)){
+				  try {
+					LockUser.logIn(uniqueId, DEFAULT_PASSWD, LockUser.class);
+				} catch (AVException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			  } else {
+				  Log.e(AV_TAG, "create user failed");
+			  }
+		  }
+	  } else {
+		  //no record, so create it
+		  if (createAnymousLockUser(uniqueId)){
+			  try {
+				LockUser.logIn(uniqueId, DEFAULT_PASSWD, LockUser.class);
+			} catch (AVException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  } else {
+			  Log.e(AV_TAG, "create user failed");
+		  }
+	  }
+  }
+  
+  
+  
+  public static boolean createAnymousLockUser(String name){
 	  LockUser lu = new LockUser();
 	  lu.setUserName(name);
 	  lu.setPassword(DEFAULT_PASSWD);
 	  lu.setUniueId(name);
 	  //add default relationship or init table here
 	  Revenue revenue = new Revenue();
-	  revenue.save();
+	  revenue.initAllField();
+	 /* try {
+		revenue.save();
+	} catch (AVException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}*/
 	  lu.setRevenue(revenue);
 	  
 	  try {
@@ -103,12 +168,23 @@ public class AVService {
 	}
   }
   
+  /**
+   * 通过手机号和密码登录
+   * @param phoneNumber
+   * @param passwd
+   * @param callback
+   */
   public static void loginByMobile(String phoneNumber, String passwd, LogInCallback<LockUser> callback) {
 	  if (LockUser.getCurrentUser(LockUser.class) ==  null) {
 		  LockUser.loginByMobilePhoneNumberInBackground(phoneNumber, passwd, callback, LockUser.class);
 	  }
   }
-  
+  /**
+   * 注册新用户
+   * @param phoneNumber
+   * @param password
+   * @param callback
+   */
   public static void signupByMobile(String phoneNumber, String password, SaveCallback callback){
 	  LockUser user = LockUser.getCurrentUser(LockUser.class);
 	  if (user != null){
@@ -118,48 +194,34 @@ public class AVService {
 	  }
   }
   
-  //type should be GOOD.TYPE_VIRTUAL/GOOD.TYPE_REAL/GOOD.TYPE_CASH
-  //public static void fetchGoodByType(String type, FindCallback<Good> callback){
-  public static void fetchGoodByType(String type){
+  /**
+   * 获取特定类型的商品, type为real/virtual/cash中的一种
+   * @param type
+   * @param callback
+   */
+  public static void fetchGoodByType(String type, FindCallback<Good> callback){
 	  AVQuery<Good> query = AVQuery.getQuery(Good.class);
-	  //AVQuery<AVObject> query = new AVQuery<AVObject>("Good");
 	  query.whereEqualTo(Good.TYPE, type);
-	  //query.whereEqualTo("type", type);
-	  
-	  query.findInBackground(new FindCallback<Good>(){
-
-			@Override
-			public void done(List<Good> arg0, AVException arg1) {
-				Log.e("TEST", "inter done");
-				if (arg1 != null){
-					Log.e("TEST", arg1.getMessage());
-				} else {
-					for (Good g : arg0){
-						Log.e("TEST", g.getString("name"));
-					}
-				}
-				// TODO Auto-generated method stub
-			}
-			
-		});
-		
-	  /*
-	  try {
-		List<Good> goods = query.find();
-		for (Good g : goods){
-			Log.e("TEST", g.getString("name"));
-		}
-	} catch (AVException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	*/
+	  query.findInBackground(callback);
   }
   
-  //fetch all games
+  /**
+   * 获取所有游戏
+   * @param callback
+   */
   public static void fetchAllGame(FindCallback<Games> callback){
 	  AVQuery<Games> query = new AVQuery<Games>();
 	  query.findInBackground(callback);
+  }
+  
+  /**
+   * 获取当前用户的收益。函数不负责校验当前用户是否为空，由函数调用者校验
+   * @param callback
+   */
+  public static void fetchUserRevenue(GetCallback<AVObject> callback) {
+	  LockUser user = LockUser.getCurrentUser(LockUser.class);
+	  Revenue re = user.getRevenue();
+	  re.fetchIfNeededInBackground(callback);
   }
 
  }
