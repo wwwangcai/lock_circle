@@ -15,6 +15,10 @@ public class Exchange extends AVObject {
 	private static final String STATUS =  "status";
 	private static final String COUNT =  "count";
 	
+	public Exchange(){
+		super();
+	}
+	
 	public String getStatus() {
 		return (this.getString(STATUS));
 		
@@ -30,12 +34,12 @@ public class Exchange extends AVObject {
 		this.put(COUNT, count);
 	}
 	
-	public void getGood(GetCallback<AVObject> callback) {
-		this.getAVObject(GOOD).fetchIfNeededInBackground(callback);
+	public Good getGood() {
+		return (Good)this.getAVObject(GOOD);
 	}
 
-	public void setGood(Good good) throws AVException {
-		this.put(GOOD, AVObject.createWithoutData(Good.class, good.getObjectId()));
+	public void setGood(Good good) {
+		this.put(GOOD, good);
 	}
 		
 }
