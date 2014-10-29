@@ -61,6 +61,9 @@
         <activity
             android:name=".GenderSetting"
             android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".NicknameSetting"
+            android:theme="@style/AppBaseTheme" />
         <activity android:name="org.achartengine.GraphicalActivity" />
 
         <service android:name=".LockService" />

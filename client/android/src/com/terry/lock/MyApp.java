@@ -22,6 +22,7 @@ public class MyApp extends Application {
 		//user = new LockUser();
 		//user.setUserName("test1");
 		//user.setPassword("12345");
+	    /*
 	     if (true) {
 	         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 	                 .detectDiskReads()
@@ -42,6 +43,7 @@ public class MyApp extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	    //LockUser user = AVUser.log
 	}
 	
