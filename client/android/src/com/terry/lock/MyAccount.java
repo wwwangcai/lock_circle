@@ -1,6 +1,7 @@
 package com.terry.lock;
 
 //import cn.buaa.myweixin.R;
+import com.avos.avoscloud.AVUser;
 import com.terry.lock.Viewpager;
 //import cn.buaa.myweixin.R.layout;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyAccount extends Activity{
+	private String current_nickname = null;
+	private String gender = null;
 	
 
 	@Override
@@ -40,7 +43,21 @@ public class MyAccount extends Activity{
             } 
         }); 
 		
-	
+		//获取本用户设置的属性，用于显示
+		LockUser user = AVUser.getCurrentUser(LockUser.class);
+		if (user == null)
+		{Toast.makeText(getApplicationContext(), "获取用户失败", Toast.LENGTH_LONG).show();}
+		current_nickname = user.getUserName();
+		gender = user.getGender();
+		
+		//获取布局中需要显示的TextView
+		TextView my_account_current_nickname = (TextView) findViewById(R.id.my_account_current_nickname);
+		TextView my_account_gender = (TextView) findViewById(R.id.my_account_gender);
+		
+		//将TextView修改为设置的值
+		if (current_nickname != null) my_account_current_nickname.setText(current_nickname);
+		if (gender != null) my_account_gender.setText(gender);
+
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         //        WindowManager.LayoutParams.FLAG_FULLSCREEN);   //ȫ����ʾ
 		//Toast.makeText(getApplicationContext(), "���ӣ��úñ��У�", Toast.LENGTH_LONG).show();
@@ -48,6 +65,13 @@ public class MyAccount extends Activity{
    }
 	public void goGenderSetting(View v) {  
 		Intent intent = new Intent (MyAccount.this,GenderSetting.class);			
+		startActivity(intent);
+		//Toast.makeText(getApplicationContext(), "实物商品", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }
+	
+	public void goNicknameSetting(View v) {  
+		Intent intent = new Intent (MyAccount.this,NicknameSetting.class);			
 		startActivity(intent);
 		//Toast.makeText(getApplicationContext(), "实物商品", Toast.LENGTH_LONG).show();
 		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
