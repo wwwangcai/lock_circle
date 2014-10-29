@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/grey_bg" android:paddingTop="@dimen/navi_bar_height" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:background="@drawable/item_view_bg" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="10.0dip" style="@style/item_relative_layout">
+        <EditText android:textSize="@dimen/num_fur_text_size" android:id="@id/send_invite_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/please_input_ur_rd_user" android:maxLength="8" />
+    </LinearLayout>
+    <Button android:id="@id/submit" android:text="@string/common_string_submit" android:onClick="confirmInviter" style="@style/button_red_long" />
+</LinearLayout>

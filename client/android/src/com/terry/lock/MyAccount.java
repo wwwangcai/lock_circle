@@ -20,6 +20,7 @@ import android.widget.Toast;
 public class MyAccount extends Activity{
 	private String current_nickname = null;
 	private String gender = null;
+	private String inviter = null;
 	
 
 	@Override
@@ -49,14 +50,17 @@ public class MyAccount extends Activity{
 		{Toast.makeText(getApplicationContext(), "获取用户失败", Toast.LENGTH_LONG).show();}
 		current_nickname = user.getUserName();
 		gender = user.getGender();
+		inviter = user.getInvatation();
 		
 		//获取布局中需要显示的TextView
 		TextView my_account_current_nickname = (TextView) findViewById(R.id.my_account_current_nickname);
 		TextView my_account_gender = (TextView) findViewById(R.id.my_account_gender);
+		TextView my_account_current_code = (TextView) findViewById(R.id.my_account_current_code);
 		
 		//将TextView修改为设置的值
 		if (current_nickname != null) my_account_current_nickname.setText(current_nickname);
 		if (gender != null) my_account_gender.setText(gender);
+		if (inviter != null) my_account_current_code.setText(inviter);
 
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         //        WindowManager.LayoutParams.FLAG_FULLSCREEN);   //ȫ����ʾ
@@ -74,6 +78,18 @@ public class MyAccount extends Activity{
 		Intent intent = new Intent (MyAccount.this,NicknameSetting.class);			
 		startActivity(intent);
 		//Toast.makeText(getApplicationContext(), "实物商品", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }
+	public void goRecommendationCode(View v) {  
+		Intent intent = new Intent (MyAccount.this,InviterSetting.class);			
+		startActivity(intent);
+		//Toast.makeText(getApplicationContext(), "实物商品", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }
+	public void goBoundPhone(View v) {  
+		//Intent intent = new Intent (MyAccount.this,InviterSetting.class);			
+		//startActivity(intent);
+		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
 		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
       }
 }

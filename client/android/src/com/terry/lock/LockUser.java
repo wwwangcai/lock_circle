@@ -88,8 +88,8 @@ public class LockUser extends AVUser {
 		this.put(BIRTHDAY, birthday);
 	}
 
-	public int getInvatation() {
-		return this.getInt(INVATATION);
+	public String getInvatation() {
+		return this.getString(INVATATION);
 	}
 
 	public void setInvatation(String invatation) {
