@@ -61,7 +61,7 @@ public class NicknameSetting extends Activity{
 		if (user == null)
 		{Toast.makeText(getApplicationContext(), "获取用户失败", Toast.LENGTH_LONG).show();}
 		String input_nick_name = nick_name.getText().toString();
-		user.setUserName(input_nick_name);
+		user.setNickName(input_nick_name);
 		/*
 	     if (true) {
 	         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()

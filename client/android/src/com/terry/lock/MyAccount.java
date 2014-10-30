@@ -48,7 +48,7 @@ public class MyAccount extends Activity{
 		LockUser user = AVUser.getCurrentUser(LockUser.class);
 		if (user == null)
 		{Toast.makeText(getApplicationContext(), "获取用户失败", Toast.LENGTH_LONG).show();}
-		current_nickname = user.getUserName();
+		current_nickname = user.getNickName();
 		gender = user.getGender();
 		inviter = user.getInvatation();
 		
@@ -90,6 +90,12 @@ public class MyAccount extends Activity{
 		//Intent intent = new Intent (MyAccount.this,InviterSetting.class);			
 		//startActivity(intent);
 		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
+      }
+	public void goBirthday(View v) {  
+		Intent intent = new Intent (MyAccount.this,BirthdaySetting.class);			
+		startActivity(intent);
+		//Toast.makeText(getApplicationContext(), "实物商品", Toast.LENGTH_LONG).show();
 		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
       }
 }

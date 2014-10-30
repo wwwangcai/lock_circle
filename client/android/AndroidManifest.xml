@@ -67,6 +67,9 @@
         <activity
             android:name=".InviterSetting"
             android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".BirthdaySetting"
+            android:theme="@style/Translucent_NoTitle" />
         
         <activity android:name="org.achartengine.GraphicalActivity" />
 
