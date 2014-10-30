@@ -49,6 +49,7 @@ public class AVService {
    */
   public static void signupOrLoginLockUser(LogInCallback<LockUser> callback) throws AVException {
 	  String uniqueId = df.getDeviceUuid().toString();
+	  long invatation = df.getDeviceUuid().timestamp();
 	  //check if there is already recode existed
 	  AVQuery<LockUser> query = AVQuery.getQuery(LockUser.class);
 	  query.whereEqualTo(LockUser.UNIUE_ID, uniqueId);
@@ -72,7 +73,7 @@ public class AVService {
 		  } catch (AVException e) {
 			// 
 			  Log.e(AV_TAG, "some thing wrong when query LockUser, so create it");
-			  if (createAnymousLockUser(uniqueId)){
+			  if (createAnymousLockUser(uniqueId, invatation)){
 				  LockUser.logInInBackground(uniqueId, DEFAULT_PASSWD, callback, LockUser.class);
 			  } else {
 				  Log.e(AV_TAG, "create user failed");
@@ -80,7 +81,7 @@ public class AVService {
 		  }
 	  } else {
 		  //no record, so create it
-		  if (createAnymousLockUser(uniqueId)){
+		  if (createAnymousLockUser(uniqueId, invatation)){
 			  LockUser.logInInBackground(uniqueId, DEFAULT_PASSWD, callback, LockUser.class);
 		  } else {
 			  Log.e(AV_TAG, "create user failed");
@@ -90,6 +91,7 @@ public class AVService {
   
   public static void signupOrLoginLockUser() {
 	  String uniqueId = df.getDeviceUuid().toString();
+	  long invatation = df.getDeviceUuid().timestamp();
 	  //check if there is already recode existed
 	  AVQuery<LockUser> query = AVQuery.getQuery(LockUser.class);
 	  query.whereEqualTo(LockUser.UNIUE_ID, uniqueId);
@@ -114,7 +116,7 @@ public class AVService {
 		  } catch (AVException e) {
 			// 
 			  Log.e(AV_TAG, "some thing wrong when query LockUser, so create it");
-			  if (createAnymousLockUser(uniqueId)){
+			  if (createAnymousLockUser(uniqueId, invatation)){
 				  try {
 					LockUser.logIn(uniqueId, DEFAULT_PASSWD, LockUser.class);
 				} catch (AVException e1) {
@@ -127,7 +129,7 @@ public class AVService {
 		  }
 	  } else {
 		  //no record, so create it
-		  if (createAnymousLockUser(uniqueId)){
+		  if (createAnymousLockUser(uniqueId, invatation)){
 			  try {
 				LockUser.logIn(uniqueId, DEFAULT_PASSWD, LockUser.class);
 			} catch (AVException e) {
@@ -142,11 +144,12 @@ public class AVService {
   
   
   
-  public static boolean createAnymousLockUser(String name){
+  public static boolean createAnymousLockUser(String name, long invatation){
 	  LockUser lu = new LockUser();
 	  lu.setUserName(name);
 	  lu.setPassword(DEFAULT_PASSWD);
 	  lu.setUniueId(name);
+	  lu.setInvatation(String.valueOf(invatation));
 	  //add default relationship or init table here
 	  Revenue revenue = new Revenue();
 	  revenue.initAllField();
