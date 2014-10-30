@@ -426,6 +426,7 @@
     <item type="id" name="dialog_announcement_close">false</item>
     <item type="id" name="birthday_dialog_year">false</item>
     <item type="id" name="birthday_dialog_month">false</item>
+    <item type="id" name="birthday_dialog_day">false</item>
     <item type="id" name="birthday_dialog_btn_cancel">false</item>
     <item type="id" name="birthday_dialog_btn_confirm">false</item>
     <item type="id" name="buy_tile">false</item>

@@ -10,6 +10,8 @@
         <TextView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/year" />
         <com.terry.wheelview.WheelView android:id="@id/birthday_dialog_month" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="2.0" />
         <TextView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/month" />
+        <com.terry.wheelview.WheelView android:id="@id/birthday_dialog_day" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="2.0" />
+        <TextView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day" />
     </LinearLayout>
     <LinearLayout android:gravity="center" android:orientation="horizontal" style="@style/dialog_content_footer">
         <Button android:textColor="@color/white" android:id="@id/birthday_dialog_btn_cancel" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="@string/cancel" android:layout_weight="1.0" style="@style/button_white_short" />

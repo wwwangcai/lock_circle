@@ -18,6 +18,7 @@ public class BirthdaySetting extends Activity {
 	private LinearLayout layout;
 	public static WheelView years;
 	public static WheelView months;
+	public static WheelView days;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,6 +36,8 @@ public class BirthdaySetting extends Activity {
 		});
 		years = (WheelView) findViewById(R.id.birthday_dialog_year);
 		months = (WheelView) findViewById(R.id.birthday_dialog_month);
+		days = (WheelView) findViewById(R.id.birthday_dialog_day);
+		//birthday_dialog_day
 
 		years.setAdapter(new NumericWheelAdapter(1970, 2020));
 		//years.setLabel("年");
@@ -43,6 +46,10 @@ public class BirthdaySetting extends Activity {
 		months.setAdapter(new NumericWheelAdapter(1, 12));
 		//months.setLabel("月");
 		months.TEXT_SIZE = 30;
+		
+		days.setAdapter(new NumericWheelAdapter(1, 31));
+		//months.setLabel("日");
+		days.TEXT_SIZE = 30;
 		/*
 		btn_ok.setOnClickListener(new OnClickListener() {
 
