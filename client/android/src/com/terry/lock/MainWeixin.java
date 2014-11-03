@@ -12,11 +12,15 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.terry.lock.MagicScrollView;
 import com.terry.lock.MagicTextView;
 import com.terry.lock.R;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.annotation.SuppressLint;
@@ -27,6 +31,7 @@ import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -79,6 +84,10 @@ import android.widget.Toast;
     public static int mWinheight;
     int[] location = new int[2];
     //----------------------------
+    SimpleAdapter listItemAdapter = null;
+    PullToRefreshListView mPullRefreshListView = null;
+    ArrayList<HashMap<String, Object>> listItem = null;
+    		
 	
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -203,10 +212,28 @@ import android.widget.Toast;
 	}
 	//listView展示
 	protected void initListView(View father_view) {
-		ListView list = (ListView) father_view.findViewById(R.id.gameListView);
+		//ListView list = (ListView) father_view.findViewById(R.id.gameListView);
+		//PullToRefreshListView mPullRefreshListView = (PullToRefreshListView) father_view.findViewById(R.id.gameListView);
+		mPullRefreshListView = (PullToRefreshListView) father_view.findViewById(R.id.gameListView);
+
+		// Set a listener to be invoked when the list should be refreshed.
+		mPullRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+				// Update the LastUpdatedLabel
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+				// Do work to refresh the list here.
+				new GetDataTask().execute();
+			}
+		});
 		//生成数据用
-		ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
-        for(int i=0;i<10;i++)  
+		//ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
+		listItem = new ArrayList<HashMap<String, Object>>();
+        for(int i=0;i<2;i++)  
         {  
             HashMap<String, Object> map = new HashMap<String, Object>();  
             map.put("ItemImage", R.drawable.item_view_networkcontrol);//图像资源的ID  
@@ -214,15 +241,22 @@ import android.widget.Toast;
             map.put("ItemText", "Finished in 1 Min 54 Secs, 70 Moves! ");  
             listItem.add(map);  
         }  
+		ListView actualListView = mPullRefreshListView.getRefreshableView();
+
+		// Need to use the Actual ListView when registering for Context Menu
+		registerForContextMenu(actualListView);
+
         //生成适配器的Item和动态数组对应的元素  
-        SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItem,//数据源   
+        //SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItem,//数据源   
+		listItemAdapter = new SimpleAdapter(this,listItem,//数据源   
             R.layout.activity_game_item,//ListItem的XML实现  
             //动态数组与ImageItem对应的子项          
             new String[] {"ItemImage","ItemTitle", "ItemText"},   
             //ImageItem的XML文件里面的一个ImageView,两个TextView ID  
             new int[] {R.id.mall_item_img,R.id.mall_item_title,R.id.mall_item_desc}  
         );  
-         
+        actualListView.setAdapter(listItemAdapter); 
+         /*
         //添加并且显示  
         list.setAdapter(listItemAdapter); 
         //添加点击  
@@ -233,9 +267,40 @@ import android.widget.Toast;
                     long arg3) {  
             	Toast.makeText(getApplicationContext(), "点击第"+arg2+"个项目", Toast.LENGTH_LONG).show();
             }  
-        }); 
+        });
+        */ 
 		
 	}
+	//pull-to-fresh list
+	private class GetDataTask extends AsyncTask<Void, Void, HashMap<String, Object>> {
+
+		@Override
+		protected HashMap<String, Object> doInBackground(Void... params) {
+			// Simulates a background job.
+			HashMap<String, Object> map = new HashMap<String, Object>(); 
+			try {
+				Thread.sleep(3000);
+	            //HashMap<String, Object> map = new HashMap<String, Object>();  
+	            map.put("ItemImage", R.drawable.item_view_networkcontrol);//图像资源的ID  
+	            map.put("ItemTitle", "Level 4");  
+	            map.put("ItemText", "Finished in 2 Min 54 Secs, 70 Moves! "); 
+			} catch (InterruptedException e) {
+			}
+			return map;
+		}
+
+		@Override
+		protected void onPostExecute(HashMap<String, Object> result) {
+			listItem.add(result);
+			listItemAdapter.notifyDataSetChanged();
+
+			// Call onRefreshComplete when the list has been refreshed.
+			mPullRefreshListView.onRefreshComplete();
+
+			super.onPostExecute(result);
+		}
+	}
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

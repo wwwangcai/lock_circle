@@ -41,15 +41,15 @@ public class BirthdaySetting extends Activity {
 
 		years.setAdapter(new NumericWheelAdapter(1970, 2020));
 		//years.setLabel("年");
-		years.TEXT_SIZE = 30;
+		years.TEXT_SIZE = 90;
 
 		months.setAdapter(new NumericWheelAdapter(1, 12));
 		//months.setLabel("月");
-		months.TEXT_SIZE = 30;
+		months.TEXT_SIZE = 90;
 		
 		days.setAdapter(new NumericWheelAdapter(1, 31));
 		//months.setLabel("日");
-		days.TEXT_SIZE = 30;
+		days.TEXT_SIZE = 90;
 		/*
 		btn_ok.setOnClickListener(new OnClickListener() {
 
@@ -63,7 +63,7 @@ public class BirthdaySetting extends Activity {
 						+ mins.getLabel());
 			}
 		})
-		*/;
+		;*/
 	}
 
 	@Override
