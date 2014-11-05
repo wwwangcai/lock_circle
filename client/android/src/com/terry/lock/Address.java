@@ -14,6 +14,10 @@ public class Address extends AVObject {
 	private static final String DISTRICT =  "district";
 	private static final String ADDR_LINE1 =  "addrLine1";
 	
+	public Address(){
+		super();
+	}
+	
 	public String getProvince() {
 		return (this.getString(PROVINCE));
 		

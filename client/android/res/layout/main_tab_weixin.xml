@@ -5,33 +5,7 @@
     android:background="#fcfcfc"
     android:orientation="vertical" >
         
-        <RelativeLayout 
-  			android:layout_width="fill_parent"
-  			android:layout_height="45dp"
-  			android:id="@+id/title" 
-  			android:background="@drawable/title_bar"
-  			android:gravity="center_vertical"  >  
-  			
-            
-      		<TextView
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content" 
-        		android:text="锁趣收益"
-        		android:layout_centerInParent="true"
-        		android:textSize="20sp"		
-				android:textColor="#ffffff" /> 
-			<ImageButton 
-			    android:id="@+id/right_btn"
-			    android:layout_width="67dp" 
-        		android:layout_height="wrap_content"
-        		android:layout_alignParentRight="true" 
-        		android:layout_centerVertical="true"
-        		android:layout_marginRight="5dp"
-        		android:src="@drawable/title_btn_function"
-				android:background="@drawable/title_btn_right"
-				android:onClick="btnmainright"
-			    />      
-		</RelativeLayout>
+
 <com.terry.lock.MagicScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/magic_scroll"
     android:layout_width="match_parent"
@@ -48,7 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/oriange"
+            android:background="@color/pink"
             android:orientation="vertical"
             android:padding="15dp" >
 
@@ -67,6 +41,7 @@
                 android:text="0.00"
                 android:textColor="@color/white"
                 android:textSize="60sp" />
+
         </LinearLayout>
 
         <TextView

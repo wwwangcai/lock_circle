@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.terry.lock.MagicScrollView android:background="@color/white" 
+    android:layout_width="fill_parent" android:layout_height="fill_parent" 
+    android:layout_marginBottom="@dimen/bottom_tab_height"
+    android:id="@+id/firstpage_magic_scroll"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/me_container" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:background="@color/income_title_bg" android:layout_width="fill_parent" android:layout_height="@dimen/first_page_title_height">
+            <TextView android:textSize="@dimen/num_fif_text_size" android:textColor="@color/white" android:id="@id/temp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/income_page_magin_left" android:layout_marginTop="@dimen/first_page_cur_margin_top" android:text="您的当前收益" />
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/income_page_magin_left" android:layout_marginTop="@dimen/first_page_text_margin">
+                <TextView android:textSize="@dimen/num_two_text_size" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="￥" />
+                <com.terry.lock.MagicTextView android:textSize="@dimen/income_page_title_text_size" android:textColor="@color/white" android:id="@id/firstpage_crrent_rewards" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="..." />
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout android:background="@color/income_sub_item_bg" android:layout_width="fill_parent" android:layout_height="@dimen/first_page_secondery_height">
+            <RelativeLayout android:id="@id/firstpage_yes_layout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="vertical" android:id="@id/temp3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+                    <com.terry.lock.MagicTextView android:textSize="@dimen/num_two_text_size" android:layout_gravity="center_horizontal" android:id="@id/firstpage_yestoday_rewards" style="@style/first_page_inner_content" />
+                    <TextView android:layout_gravity="center_horizontal" android:text="@string/yestoday_income" style="@style/first_page_inner_title" />
+                </LinearLayout>
+            </RelativeLayout>
+            <View style="@style/first_page_vertical_divider" />
+            <RelativeLayout android:id="@id/firstpage_increase_layout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/first_page_padding_left" android:layout_centerInParent="true">
+                    <com.terry.lock.MagicTextView android:textSize="@dimen/num_two_text_size" android:layout_gravity="center_horizontal" android:id="@id/firstpage_total_rewards" style="@style/first_page_inner_content" />
+                    <TextView android:layout_gravity="center_horizontal" android:text="@string/total_rewards" style="@style/first_page_inner_title" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <View style="@style/custom_divider" />
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@id/download_sign" android:layout_width="fill_parent" style="@style/item_relative_layout">
+                <TextView android:text="待激活收益" android:drawableLeft="@drawable/sign_icon" android:layout_alignParentLeft="true" style="@style/first_page_inner_text" />
+                <ImageView android:id="@id/a" android:layout_marginRight="10.0dip" style="@style/first_page_inner_arrow" />
+                <ImageView android:id="@id/first_page_sign_notice" android:background="@drawable/icon_item_notice_bubble" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_toLeftOf="@id/a" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View style="@style/custom_divider" />
+            <RelativeLayout android:id="@id/income_details" style="@style/item_relative_layout">
+                <TextView android:text="收益明细" android:drawableLeft="@drawable/item_view_chart" android:layout_alignParentLeft="true" style="@style/first_page_inner_text" />
+                <ImageView android:id="@id/a" android:layout_marginRight="10.0dip" style="@style/first_page_inner_arrow" />
+            </RelativeLayout>
+            <View style="@style/custom_divider" />
+            <RelativeLayout android:id="@id/buy_succ" style="@style/item_relative_layout">
+                <TextView android:text="成功兑换" android:drawableLeft="@drawable/item_view_bag" android:layout_alignParentLeft="true" style="@style/first_page_inner_text" />
+                <ImageView android:id="@id/a" android:layout_marginRight="10.0dip" style="@style/first_page_inner_arrow" />
+            </RelativeLayout>
+            <View style="@style/custom_divider" />
+            <RelativeLayout android:id="@id/inform_notice" android:layout_width="fill_parent" style="@style/item_relative_layout" android:onClick="exit_settings">
+                <TextView android:text="公告" android:drawableLeft="@drawable/icon_item_boardcasting" android:layout_alignParentLeft="true" style="@style/first_page_inner_text" />
+                <ImageView android:id="@id/a" android:layout_marginRight="10.0dip" style="@style/first_page_inner_arrow" />
+                <ImageView android:id="@id/first_page_notice" android:background="@drawable/icon_item_notice_bubble" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_toLeftOf="@id/a" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View style="@style/custom_divider" />
+        </LinearLayout>
+    </LinearLayout>
+</com.terry.lock.MagicScrollView>

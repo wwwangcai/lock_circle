@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#eee" >  
-
+<!--  
     <RelativeLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
@@ -14,8 +14,17 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:background="@drawable/bottom_bar"
-        >             
-      
+        >       
+-->      
+    <RelativeLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@drawable/bottom_bar_bg"
+        > 
+        <!-- 
         <ImageView
         	android:id="@+id/img_tab_now"
         	android:layout_width="wrap_content"
@@ -24,8 +33,15 @@
         	android:layout_gravity="bottom"            	
             android:layout_alignParentBottom="true"
         	android:src="@drawable/tab_bg" />              
-         
-         
+         -->
+         <ImageView
+        	android:id="@+id/img_tab_now"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"        	     	
+        	android:scaleType="matrix"
+        	android:layout_gravity="bottom"            	
+            android:layout_alignParentBottom="true"
+        	android:src="@drawable/cussor" />  
          <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

@@ -55,6 +55,23 @@
             android:name="Exit"
             android:theme="@style/MyDialogStyle" >
         </activity>
+        <activity
+            android:name=".MyAccount"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".GenderSetting"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".NicknameSetting"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".InviterSetting"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".BirthdaySetting"
+            android:theme="@style/Translucent_NoTitle" />
+        
+        <activity android:name="org.achartengine.GraphicalActivity" />
 
         <service android:name=".LockService" />
 
@@ -88,6 +105,11 @@
     </uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     
 
 </manifest>

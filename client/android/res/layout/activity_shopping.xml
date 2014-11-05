@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eee"
+        android:orientation="vertical" >
+                <LinearLayout 
+  			android:layout_width="fill_parent"
+  			android:layout_height="45dp"
+  			android:id="@+id/title" 
+  			android:background="@drawable/tab_middle_active"
+  			android:gravity="center_horizontal|center_vertical"  >  
+      		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content" 
+        		android:text="兑换"
+        		android:textSize="20sp"		
+				android:textColor="#ffffff" />       
+			</LinearLayout>
+<ScrollView android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  >
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/shopping_rl_lock" android:layout_marginTop="@dimen/content_magin_top" android:onClick="goShopVitem" style="@style/new_setting_relative_layout_item">
+            <TextView android:id="@id/shopping_tv_lock" android:text="@string/virtue_item" android:drawableLeft="@drawable/item_view_unlock" style="@style/new_setting_grey_text" />
+            <ImageView style="@style/new_setting_img_arrow" />
+        </RelativeLayout>
+        <View style="@style/custom_divider" />
+       <RelativeLayout android:id="@id/shopping_rl_account" android:onClick="goShopCitem" style="@style/new_setting_relative_layout_item">
+            <TextView android:id="@id/shopping_tv_my_account" android:text="@string/crad_item" android:drawableLeft="@drawable/item_view_unlock" style="@style/new_setting_grey_text" />
+            <ImageView android:id="@id/a" style="@style/new_setting_img_arrow" />
+
+        </RelativeLayout>
+        <View style="@style/custom_divider" />
+        <RelativeLayout android:id="@id/shopping_rl_download" android:onClick="goShopRitem" style="@style/new_setting_relative_layout_item">
+            <TextView android:id="@id/shopping_tv_my_download" android:text="@string/real_item" android:drawableLeft="@drawable/item_view_unlock" style="@style/new_setting_grey_text" />
+            <ImageView android:id="@id/abcd" style="@style/new_setting_img_arrow" />
+            <ImageView android:id="@id/setting_download_notice" android:background="@drawable/icon_item_notice_bubble" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_toLeftOf="@id/abcd" android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+
+        <View style="@style/custom_divider" />
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

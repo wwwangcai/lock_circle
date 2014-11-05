@@ -18,6 +18,9 @@ public class UserGame extends AVObject {
 	//某用户在该游戏上的总收益
 	private static final String TOTAL_REVENUE =  "totalRevenue";
 	
+	public UserGame(){
+		super();
+	}
 	
 	public String getMaxScore() {
 		return (this.getString(MAX_SCORE));
@@ -34,14 +37,12 @@ public class UserGame extends AVObject {
 		this.put(TOTAL_REVENUE, revenue);
 	}
 	
-	public void getGame(GetCallback<AVObject> callback) {
-		this.getAVObject(GAME).fetchIfNeededInBackground(callback);
+	public Games getGame() {
+		return (Games)this.getAVObject(GAME);
 	}
 
-	public void setGame(Games game) throws AVException {
-		//revenue must be existed already
-		//by default, each LockUser created must create a record in revenue table
-		this.put(GAME, AVObject.createWithoutData(Games.class, game.getObjectId()));
+	public void setGame(Games game) {
+		this.put(GAME, game);
 	}
 	
 		

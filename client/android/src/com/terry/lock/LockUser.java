@@ -1,5 +1,7 @@
 package com.terry.lock;
 
+import java.util.List;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVRelation;
@@ -32,17 +34,18 @@ public class LockUser extends AVUser {
 	public static final String DEFAULT_CARD =  "defaultCard";
 	//该用户所有兑换记录
 	public static final String EXCHANGE =  "exchange";
+	public static final String NICKNAME =  "nickName";
 		
-	private AVRelation<UserGame> ugRelation = null;
-	private AVRelation<Address> addrRelation = null;
-	private AVRelation<Card> cardRelation = null;
-	private AVRelation<Exchange> exRelation = null;
+	//private AVRelation<UserGame> ugRelation = null;
+	//private AVRelation<Address> addrRelation = null;
+	//private AVRelation<Card> cardRelation = null;
+	//private AVRelation<Exchange> exRelation = null;
 	
 	public LockUser() {
 		super();
-		ugRelation = this.getRelation(GAMES);
-		addrRelation = this.getRelation(ADDRESS);
-		addrRelation = this.getRelation(CARD);
+		//ugRelation = this.getRelation(GAMES);
+		//addrRelation = this.getRelation(ADDRESS);
+		//addrRelation = this.getRelation(CARD);
 	}
 	
     public String getUserName() {
@@ -52,6 +55,14 @@ public class LockUser extends AVUser {
     public void setUserName(String username) {
         this.setUsername(username);
     }
+    
+    public String getNickName() {
+		return this.getString(NICKNAME);
+	}
+
+	public void setNickName(String name) {
+		this.put(NICKNAME, name);
+	}
  
     public String getUniueId() {
 		return this.getString(UNIUE_ID);
@@ -77,89 +88,112 @@ public class LockUser extends AVUser {
 		this.put(BIRTHDAY, birthday);
 	}
 
-	public int getInvatation() {
-		return this.getInt(INVATATION);
+	public String getInvatation() {
+		return this.getString(INVATATION);
 	}
 
 	public void setInvatation(String invatation) {
 		this.put(INVATATION, invatation);
 	}
 
+	/*
 	public void getRevenue(GetCallback<AVObject> callback) {
-		this.getAVObject(REVENUE).fetchIfNeededInBackground(callback);
+		//this.getAVObject(REVENUE).fetchIfNeededInBackground(callback);
 		//this.getAVObject(REVENUE, LockUser.class).fetchIfNeededInBackground(callback);
+		//this.getAVObject(REVENUE, Revenue.class).fetchIfNeededInBackground(callback);
+		try {
+			this.getAVObject(REVENUE, Revenue.class).fetchIfNeededInBackground(callback);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	*/
+	
+	public Revenue getRevenue(){
+		return (Revenue)super.getAVObject(REVENUE);
 	}
 
-	public void setRevenue(Revenue revenue) throws AVException {
+	public void setRevenue(Revenue revenue) {
 		//revenue must be existed already
 		//by default, each LockUser created must create a record in revenue table
-		this.put(REVENUE, AVObject.createWithoutData(Revenue.class, revenue.getObjectId()));
+		//this.put(REVENUE, AVObject.createWithoutData(Revenue.class, revenue.getObjectId()));
+		this.put(REVENUE, revenue);
 	}
 
 	// below methods more complicated
-	public void getBelongs(GetCallback<AVObject> callback) {
-		this.getAVObject(BELONGS).fetchIfNeededInBackground(callback);
+	public LockUser getBelongs() {
+		return (LockUser)super.getAVUser(BELONGS, LockUser.class);
 	}
 
-	public void setBelongs(LockUser invator) throws AVException {
+	public void setBelongs(LockUser invator) {
 		//因为介绍者肯定是已存在用户,所以用createWithoutData
-		this.put(BELONGS, AVObject.createWithoutData(LockUser.class, invator.getObjectId()));
+		//this.put(BELONGS, AVObject.createWithoutData(LockUser.class, invator.getObjectId()));
+		this.put(BELONGS, invator);
 	}
 
-	public void getCurrentGame(GetCallback<AVObject> callback) {
-		this.getAVObject(CURRENT_GAME).fetchIfNeededInBackground(callback);
+	public UserGame getCurrentGame() {
+		return (UserGame)this.getAVObject(CURRENT_GAME);
 	}
 
-	public void setCurrentGame(UserGame currentGame) throws AVException {
-		this.put(CURRENT_GAME, AVObject.createWithoutData(UserGame.class, currentGame.getObjectId()));
+	public void setCurrentGame(UserGame game) {
+		this.put(CURRENT_GAME, game);
 	}
 	
-	public void getGames(FindCallback<UserGame> callback) {
-		this.ugRelation.getQuery().findInBackground(callback);
+	@SuppressWarnings("unchecked")
+	public List<UserGame> getGames() {
+		return (List<UserGame>)getList(GAMES);
 	}
 
 	public void addGames(UserGame game) {
-		this.ugRelation.add(game);
+		//this.ugRelation.add(game);
+		addUnique(GAMES, game);
 	}
 
-	public void getAddress(FindCallback<Address> callback) {
-		this.addrRelation.getQuery().findInBackground(callback);
+	@SuppressWarnings("unchecked")
+	public List<Address> getAddress() {
+		return (List<Address>)getList(ADDRESS);
 	}
 
 	public void addAddress(Address address) {
-		this.addrRelation.add(address);
+		//this.ugRelation.add(game);
+		addUnique(ADDRESS, address);
 	}
 
-	public void getCard(FindCallback<Card> callback) {
-		this.cardRelation.getQuery().findInBackground(callback);
+	@SuppressWarnings("unchecked")
+	public List<Card> getCard() {
+		return (List<Card>)getList(CARD);
 	}
 
 	public void addCard(Card card) {
-		this.cardRelation.add(card);
+		//this.ugRelation.add(game);
+		addUnique(CARD, card);
 	}
 	
-	public void getDefaultAddr(GetCallback<AVObject> callback) {
-		this.getAVObject(DEFAULT_ADDR).fetchIfNeededInBackground(callback);
+	public Address getDeafultAddr() {
+		return (Address)this.getAVObject(DEFAULT_ADDR);
 	}
 
-	public void setDefaultAddr(Address address) throws AVException {
-		this.put(DEFAULT_ADDR, AVObject.createWithoutData(Address.class, address.getObjectId()));
+	public void setDefaultAddr(Address address) {
+		this.put(DEFAULT_ADDR, address);
 	}
 	
-	public void getDefaultCard(GetCallback<AVObject> callback) {
-		this.getAVObject(DEFAULT_CARD).fetchIfNeededInBackground(callback);
+	public Card getDeafultCard() {
+		return (Card)this.getAVObject(CARD);
 	}
 
-	public void setDefaultCard(Card card) throws AVException {
-		this.put(DEFAULT_CARD, AVObject.createWithoutData(Card.class, card.getObjectId()));
+	public void setDefaultCard(Card card) {
+		this.put(DEFAULT_CARD, card);
 	}
 	
-	public void getExchange(FindCallback<Exchange> callback) {
-		this.exRelation.getQuery().findInBackground(callback);
+	@SuppressWarnings("unchecked")
+	public List<Exchange> getExchange() {
+		return (List<Exchange>)getList(EXCHANGE);
 	}
 
 	public void addExchange(Exchange exchange) {
-		this.exRelation.add(exchange);
+		//this.ugRelation.add(game);
+		addUnique(EXCHANGE, exchange);
 	}
 
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eee"
+        android:orientation="vertical" >
+                <LinearLayout 
+  			android:layout_width="fill_parent"
+  			android:layout_height="45dp"
+  			android:id="@+id/title" 
+  			android:background="@drawable/tab_middle_active"
+  			android:gravity="center_horizontal|center_vertical"  >  
+      		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content" 
+        		android:text="竞技"
+        		android:textSize="20sp"		
+				android:textColor="#ffffff" />       
+			</LinearLayout>
+<LinearLayout android:background="@color/income_sub_item_bg" android:layout_width="fill_parent" android:layout_height="@dimen/first_page_secondery_height">
+            <RelativeLayout android:id="@id/firstpage_yes_layout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="vertical" android:id="@id/temp3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+                    <TextView android:textSize="@dimen/num_two_text_size" android:layout_gravity="center_horizontal" android:id="@id/firstpage_yestoday_rewards" style="@style/first_page_inner_content" />
+                    <TextView android:layout_gravity="center_horizontal" android:text="竞技胜率" style="@style/first_page_inner_title" />
+                </LinearLayout>
+            </RelativeLayout>
+            <View style="@style/first_page_vertical_divider" />
+            <RelativeLayout android:id="@id/firstpage_increase_layout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/first_page_padding_left" android:layout_centerInParent="true">
+                    <TextView android:textSize="@dimen/num_two_text_size" android:layout_gravity="center_horizontal" android:id="@id/firstpage_total_rewards" style="@style/first_page_inner_content" />
+                    <TextView android:layout_gravity="center_horizontal" android:text="竞技收益" style="@style/first_page_inner_title" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+<View style="@style/custom_divider" />  
+               <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/first_page_padding_left" android:layout_centerInParent="true">
+
+                    <TextView android:layout_gravity="center_horizontal" android:text="当前锁屏游戏" style="@style/first_page_inner_title" />
+                </LinearLayout>
+<View style="@style/custom_divider" />
+<LinearLayout   
+    android:id="@+id/gameLinearLayout"   
+    android:layout_width="wrap_content"   
+    android:layout_height="wrap_content"   >  
+<com.handmark.pulltorefresh.library.PullToRefreshListView android:layout_width="wrap_content"   
+          android:layout_height="wrap_content"   
+          android:id="@+id/gameListView"  
+          />  
+</LinearLayout>  
+
+
+</LinearLayout>

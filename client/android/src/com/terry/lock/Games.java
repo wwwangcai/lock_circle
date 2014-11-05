@@ -14,6 +14,10 @@ public class Games extends AVObject {
 	//最好成绩
 	private static final String SCORE =  "score";
 	
+	public Games(){
+		super();
+	}
+	
 	public String getName() {
 		return (this.getString(NAME));
 		
