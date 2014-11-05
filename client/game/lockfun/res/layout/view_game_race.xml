@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <RelativeLayout
+        android:id="@+id/game_race"
+          android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="100dp"
+                android:layout_centerHorizontal="true"
+        
+        android:background="@drawable/lightgray">
+        
+        <ImageView
+            android:id="@+id/game_fairy"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/race_rabbit" />
+        
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/red" />
+        
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:background="#66CCFF" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="1dip"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:background="#66CCFF" />
+
+    <Button
+        android:id="@+id/left_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="23dp"
+        android:layout_marginRight="25dp"
+        android:layout_toLeftOf="@+id/view1"
+        android:text="L" />
+
+    <Button
+        android:id="@+id/right_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/left_foot"
+        android:layout_alignBottom="@+id/left_foot"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/view1"
+        android:text="R" />
+
+</RelativeLayout>

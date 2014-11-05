@@ -6,6 +6,7 @@
     <string name="game_round_count">5</string>
     <string name="game_score_prefix">所用时间</string>
     <string name="game_coin_prefix">所得coin</string>
+    <string name="game_instruction">把兔子点成同色！</string>
 
 
 </resources>

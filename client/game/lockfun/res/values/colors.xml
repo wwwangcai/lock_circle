@@ -4,5 +4,7 @@
 
     <drawable name="orangered">#FF4500</drawable>
     <drawable name="lightyellow">#FFFFE0</drawable>
+    <drawable name="lightgray">#90505050</drawable>
+    <drawable name="red">#ff0000</drawable>
     
 </resources>

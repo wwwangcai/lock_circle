@@ -61,6 +61,8 @@ public class MainActivity extends Activity {
 	protected PopupWindow gameScanPopWin;
 
 	protected PopupWindow scorePopWin;
+
+	protected GameRaceLayout mGameRaceLayout;
 	
 	
     @Override
@@ -145,8 +147,13 @@ public class MainActivity extends Activity {
 			
 			if(MSG_GAME_READY == msg.what){
 				Log.e(TAG,"MSG_GAME_READY");
+				//TODO ,GET DEFAULT GAME
+				//switch
+				mGameRaceLayout = new GameRaceLayout(MainActivity.this);
 				mGameLayout = new GameLayout(MainActivity.this);
-				mGameLayout.setMainHandler(mHandler);
+				
+				//mGameLayout.setMainHandler(mHandler);
+				mGameRaceLayout.setMainHandler(mHandler);
 				
 				//inflate view_game_scoreboard
 				LayoutInflater mLayoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -159,8 +166,8 @@ public class MainActivity extends Activity {
 				animation.setDuration(1000);
 				//animation.setRepeatCount(Animation.INFINITE);
 				
-				//3s 倒计时
-				animation.setRepeatCount(3);
+				//3s 倒计时,n+1圈
+				animation.setRepeatCount(2);
 				
 				animation.setAnimationListener(new AnimationListener(){
 
@@ -178,8 +185,10 @@ public class MainActivity extends Activity {
 						gameScanPopWin.dismiss();
 						mainLayout.removeView(mGameReady);
 						
-						mainLayout.addView(mGameLayout);
 						
+						//加载游戏
+						//mainLayout.addView(mGameLayout);
+						mainLayout.addView(mGameRaceLayout);
 						// for test, to delete
 						gameStartTime = System.nanoTime();
 						
@@ -192,20 +201,22 @@ public class MainActivity extends Activity {
 					}
 					
 				});
-				im_scan.startAnimation(animation);
+				
 				
 				
 				im_dian = (ImageView) (gameScanView.findViewById(R.id.im_dian));
 				AlphaAnimation animation2 = new AlphaAnimation(0.0f, 1.0f);
 				animation2.setDuration(1000);
 				animation2.setRepeatCount(Animation.INFINITE);
-				im_dian.startAnimation(animation2);
+				
 								
 				View popParent = findViewById(R.id.mainlayout);
 								
 				//show game_score pop window
 				popGameScanWin(gameScanView,popParent);	
 				
+				im_scan.startAnimation(animation);
+				im_dian.startAnimation(animation2);
 				//1\2\3 coutdown
 
 			}
@@ -223,7 +234,9 @@ public class MainActivity extends Activity {
 				
 				//gameScore单位是 ms
 				gameScore = Math.round(((gameEndTime - gameStartTime)/Math.pow(10,6)));
-				mainLayout.removeView(mGameLayout);
+				//mainLayout.removeView(mGameLayout);
+				mainLayout.removeView(mGameRaceLayout);
+
 				//mainLayout.addView(mGameReady);
 				
 				//inflate view_game_scoreboard

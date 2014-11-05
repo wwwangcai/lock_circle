@@ -24,6 +24,7 @@ public class GameReadyLayout extends RelativeLayout {
 		initView();
 	}
 	
+	
 
 	public GameReadyLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
