@@ -3,7 +3,6 @@ package com.terry.lock;
 //import cn.buaa.myweixin.R;
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;

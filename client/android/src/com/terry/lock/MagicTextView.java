@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.terry.lock.MagicScrollView.ScrollListener;
@@ -35,11 +36,9 @@ public class MagicTextView extends TextView implements ScrollListener {
     // 偏移量 主要用来进行校正距离。
     private static final int OFFSET = 20;
     DecimalFormat fnum = new DecimalFormat("0.00");
-
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
-
                 case REFRESH:
                     if (rate * mCurValue < mGalValue) {
                         refreshing = true;
@@ -80,8 +79,10 @@ public class MagicTextView extends TextView implements ScrollListener {
 
     public void setValue(double value) {
         mCurValue = 0.00;
-        mGalValue = isShown() ? value : 0;
+        //mGalValue = isShown() ? value : 0;
+        mGalValue = value;
         mValue = value;
+        Log.d("isShown is ====>", "" + isShown());
         mRate = (double) (mValue / 20.00);
         BigDecimal b = new BigDecimal(mRate);
         mRate = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();

@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -54,6 +55,7 @@ import android.widget.Toast;
 @SuppressLint("HandlerLeak") public class MainWeixin extends Activity {
 	
 	public static MainWeixin instance = null;
+    private LocalActivityManager mactivityManager = null; 
 	 
 	private ViewPager mTabPager;	
 	private ImageView mTabImg;// 动画图片
@@ -88,7 +90,6 @@ import android.widget.Toast;
     PullToRefreshListView mPullRefreshListView = null;
     ArrayList<HashMap<String, Object>> listItem = null;
     		
-	
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             int height = mContainer.getMeasuredHeight();
@@ -301,9 +302,22 @@ import android.widget.Toast;
 		}
 	}
 	
+    /** 
+     * 通过activity获取视图 
+     *  
+     * @param id 
+     * @param intent 
+     * @return 
+     */  
+    private View getView(String id, Intent intent) {  
+        return mactivityManager.startActivity(id, intent).getDecorView();  
+    } 
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mactivityManager = new LocalActivityManager(this, true); 
+        mactivityManager.dispatchCreate(savedInstanceState);  
         setContentView(R.layout.main_weixin);
          //启动activity时不自动弹出软键盘
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
@@ -341,31 +355,37 @@ import android.widget.Toast;
         //InitImageView();//使用动画
         //将要分页显示的View装入数组中
         LayoutInflater mLi = LayoutInflater.from(this);
+        
+        //load view from activty
+        Intent intent_revenue = new Intent(getApplicationContext(), LockMainRevenue.class); 
+        Intent intent_shop = new Intent(getApplicationContext(), LockMainShop.class);  
         //View view1 = mLi.inflate(R.layout.main_tab_weixin, null);
-        View view1 = mLi.inflate(R.layout.first_page_layout, null);
+        //View view1 = mLi.inflate(R.layout.first_page_layout, null);
+        View view1 = getView("fake",intent_revenue );
         //LinearLayout view1 =  (LinearLayout)mLi.inflate(R.layout.first_page_layout, null);
         //View view2 = mLi.inflate(R.layout.main_tab_address, null);
         View view2 = mLi.inflate(R.layout.activity_game, null);
         //View view3 = mLi.inflate(R.layout.main_tab_friends, null);
-        View view3 = mLi.inflate(R.layout.activity_shopping, null);
+        //View view3 = mLi.inflate(R.layout.activity_shopping, null);
+        View view3 = getView("fake",intent_shop );
         //View view4 = mLi.inflate(R.layout.main_tab_settings, null);
         View view4 = mLi.inflate(R.layout.activity_setting, null);
         
         //用于初始化支付宝效果
-        initMagic(view1);
+        //initMagic(view1);
         //加入图表效果
         //view1.addView(initAchart());
         //初始化listview，后续加载物品在此栏目进行
         initListView(view2);
 
 
-      //每个页面的view数据
+        //每个页面的view数据
         final ArrayList<View> views = new ArrayList<View>();
         views.add(view1);
         views.add(view2);
         views.add(view3);
         views.add(view4);
-      //填充ViewPager的数据适配器
+        //填充ViewPager的数据适配器
         PagerAdapter mPagerAdapter = new PagerAdapter() {
 			
 			@Override
@@ -556,13 +576,14 @@ import android.widget.Toast;
 		Toast.makeText(getApplicationContext(), "TODO", Toast.LENGTH_LONG).show();
 		//Toast.makeText(getApplicationContext(), "点击了功能按钮", Toast.LENGTH_LONG).show();
       }  	
-
+    /*
 	public void exit_settings(View v) {                           //退出  伪“对话框”，其实是一个activity
 		//Intent intent = new Intent (MainWeixin.this,ExitFromSettings.class);
 		//Intent intent = new Intent (MainWeixin.this,Exit.class);
 		//startActivity(intent);	
 		initAchart();
 	 }
+	 */
     //activity_setting 所有按钮设置
 	public void goLockSetting(View v) {  
 		//Intent intent = new Intent (MainWeixin.this,MainTopRightDialog.class);			

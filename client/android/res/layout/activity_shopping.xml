@@ -4,7 +4,7 @@
         android:layout_height="fill_parent"
         android:background="#eee"
         android:orientation="vertical" >
-                <LinearLayout 
+        <LinearLayout 
   			android:layout_width="fill_parent"
   			android:layout_height="45dp"
   			android:id="@+id/title" 
@@ -16,7 +16,7 @@
         		android:text="兑换"
         		android:textSize="20sp"		
 				android:textColor="#ffffff" />       
-			</LinearLayout>
+        </LinearLayout>
 <ScrollView android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
   >
     <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
